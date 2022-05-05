@@ -5,8 +5,9 @@ describe("Login verify test", () => {
             cy.get('#username').type(Cypress.env('usar'));
             cy.get('#password').type(Cypress.env('pazz'), {log: false});
             cy.contains('Login').click();
+            cy.get('[alt=\'Profile picture of Eugene Buyanov\']').should('be.visible');
             cy.get('.logout-button').click();
-            cy.get('div#logout h2').should('have.text', 'Logout successful')
+            cy.get('div#logout h2').should('have.text', 'Logout successful');
         });
 
         it('Login failed', function () {
