@@ -29,6 +29,8 @@ declare namespace Cypress {
          * Wraps iframe by cypress command
          */
         getIframeBody(): Chainable<any>;
+        checkBillboardElementCount(categoryName: string): Chainable<any>;
+        clickMainSection(sectionName: string): Chainable<any>;
     }
 }
 
@@ -36,3 +38,17 @@ declare namespace Cypress {
 Cypress.Commands.add('getIframeBody', () => {
     return cy.get('iframe').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap);
 });
+
+Cypress.Commands.add('clickMainSection', (sectionName: string) => {
+    cy.contains(sectionName).click()
+}
+);
+
+Cypress.Commands.add('checkBillboardElementCount', (categoryName: string) => {
+        cy.get('.products li').find('h2').contains(categoryName).find('mark').then((elem)=>{
+        const numberOfProducts = parseInt(elem.text().split(" ")[0]);
+        cy.wrap(elem).click();
+        cy.get('.products li').should('have.length', numberOfProducts);
+    })
+});
+
