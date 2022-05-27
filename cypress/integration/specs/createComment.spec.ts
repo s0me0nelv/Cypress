@@ -1,5 +1,5 @@
-describe('Create comment', () => {
-    it('Multiple requests with POST Example', () => {
+describe('POST requests', () => {
+    it('should create a new comment and check response status, postId and comment id', () => {
         cy.request('https://jsonplaceholder.cypress.io/comments?_limit=1')
             .its('body')
             .its('0')
